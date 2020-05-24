@@ -1,0 +1,6 @@
+---
+  - name : task1 - writes the team names to all 3 VMS in /root/team.txt file
+    hosts: ipCluster
+    roles:
+      - task1-role
+       

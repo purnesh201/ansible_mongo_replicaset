@@ -1,0 +1,7 @@
+# The global variable file
+
+replicaSetName: rs0
+mongodb_db_path: /var/lib/mongodb
+mongodb_log_path: /var/log/mongodb/mongod.log
+db_name: test
+port: 27017

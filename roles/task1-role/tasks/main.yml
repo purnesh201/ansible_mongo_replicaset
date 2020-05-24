@@ -1,0 +1,9 @@
+---
+# tasks file for task1-role
+- name: Write Team names to text file
+  copy:
+    dest: "/root/team.txt"
+    content:
+      Purnesh Sairam Anugolu
+      Sai Aditya Thalluri
+      Sai Kiran Veera

@@ -1,0 +1,19 @@
+# mongodb.conf
+
+systemLog:
+  path: {{mongodb_log_path}}
+  destination: file
+net:
+  bindIp: {{ ansible_eth0.ipv4.address }},127.0.0.1
+storage:
+  dbPath: {{mongodb_db_path}}
+  journal:
+    enabled: true
+  engine: wiredTiger
+  wiredTiger:
+    engineConfig:
+      statisticsLogDelaySecs: 30
+operationProfiling:
+  mode: slowOp
+replication:
+  replSetName: "{{replicaSetName}}"

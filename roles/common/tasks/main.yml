@@ -1,0 +1,61 @@
+# ---
+#   - name: Add mongo ppa key
+#     apt_key: 
+#       keyserver: hkp://keyserver.ubuntu.com:80
+#       id: 7F0CEB10
+
+#   - name: Add mongo sources list
+#     apt_repository:
+#       filename: '/etc/apt/sources.list.d/mongodb.list'
+#       repo: "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse"
+#       state: present
+  
+#   - name: Install mongo
+#     apt: 
+#       name: mongodb-org 
+#       state: latest
+#       update_cache: yes
+  
+#   - name: Run Mongo service
+#     service:
+#       name: mongod
+#       state: started
+
+---
+#tasks file for mongoDB setup
+
+- name: install mongoDB
+  apt: 
+    name: mongodb
+    state: present
+
+- name: copy config file
+  template: 
+    src: mongod.initial.conf.j2
+    dest: /etc/mongodb.conf
+ 
+- name: Ensure mongodb is running and and enabled to start automatically on reboots
+  systemd:
+    name: mongodb
+    enabled: yes
+    state: started
+
+  notify:
+     restart mongodb
+#Calling handler to restart the demon after the primary and secondary configuration is set
+
+
+
+# Install mongodb 
+# ---
+# - name: get apt key
+#   apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=EA312927
+
+# # - name: create mongodb-org-3.2.list
+# #   file: path=/etc/apt/sources.list.d/mongodb-org-3.2.list state=file
+
+# - name: add to mongodb-org-4.2.list
+#   lineinfile: dest=/etc/apt/sources.list.d/mongodb-org-4.2.list line="deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/4.2 multiverse"
+
+# - name: install mongo db
+#   apt: name=mongodb-org

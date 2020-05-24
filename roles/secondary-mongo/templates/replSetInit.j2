@@ -1,0 +1,3 @@
+
+var host2 = (new Mongo('localhost:{{port}}')).getDB('{{db_name}}')
+host2.myCollection.setSlaveOk()

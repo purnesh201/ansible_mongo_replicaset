@@ -1,0 +1,24 @@
+---
+  - name: Primary Node Configuration
+    hosts: primary
+    become: yes
+    roles:
+      - common
+      
+  - name: Secondary Node Configuration
+    hosts: secondary
+    become: yes
+    roles:
+      - common
+
+  #- name: sleep for 300 seconds and continue with play
+  #  wait_for:
+  #    timeout: 30
+  - name: Start replica in primary node
+    hosts: primary
+    roles:
+      - primary-mongo
+  - name: Start replica in secondary node
+    hosts: secondary
+    roles:
+      - secondary-mongo

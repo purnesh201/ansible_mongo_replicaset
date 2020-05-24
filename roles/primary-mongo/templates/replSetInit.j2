@@ -1,0 +1,23 @@
+
+rs.initiate({
+    _id: "{{replicaSetName}}",
+    members: [{
+        _id: 1,
+        host: "{{groups["primary"][0]}}:{{port}}",
+        priority: 10
+    },
+    {
+        _id: 2,
+        host: "{{groups["secondary"][0]}}:{{port}}"
+
+
+    },{
+        _id: 3,
+        host: "{{groups["secondary"][1]}}:{{port}}",
+
+    }]
+})
+
+var host1 = (new Mongo('localhost:{{port}}')).getDB('{{db_name}}')
+host1.myCollection.insert({text:"Hello World from primary!!"})
+
